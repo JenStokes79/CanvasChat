@@ -1,3 +1,12 @@
+ 
+//global variables
+var words = ["tree", "scissors", "pots"];
+var selectedWord = "";
+var winCount= 0;
+
+
+
+
  $(function() {
      //connects socket.io to wherever we need given the context
      let client = io.connect(window.location.host);
@@ -19,4 +28,23 @@
      client.on('chat message', function(msg) {
          $('#messages').append($('<li>').text(msg));
      });
- });
+});
+
+
+//function that chooses a word for the user to draw
+function startGame () {
+selectedWord = words[Math.floor(Math.random() * words.length)];
+console.log(selectedWord);
+} //random word displays in console
+
+function wordInString(s, word){
+  return new RegExp( '\\b' + word + '\\b', 'i').test(s);
+
+}
+
+wordInString("", selectedWord)
+
+
+startGame();
+
+
